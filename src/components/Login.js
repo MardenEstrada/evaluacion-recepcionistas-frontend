@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { formToJSON } from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import '../styles/Login.css'; // Importa el archivo CSS aquí
 
 const Login = () => {
@@ -21,32 +21,37 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
-      <h1>Iniciar Sesión</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button className="submit-button" type="submit">Iniciar Sesión</button>
-      </form>
-    </div>
+  <main>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h2>Iniciar Sesión</h2>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          aria-label="correo de usuario"
+          placeholder="correo@ejemplo.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          aria-label="contraseña de usuario"
+          placeholder="****************"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button className="submit-button" type="submit" name="submit">Iniciar Sesión</button>
+    </form>
+  </main>
+  
   );
 };
 

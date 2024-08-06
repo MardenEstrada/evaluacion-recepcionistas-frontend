@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Radar } from 'react-chartjs-2';
 import api from '../api'; // Archivo que contiene la configuración de Axios
-  
+
 // Registra los componentes necesarios en Chart.js
 ChartJS.register(
     RadarController,
@@ -22,7 +22,7 @@ ChartJS.register(
     Tooltip,
     Legend
 );
-  
+
 const Estadisticas = () => {
     const [data, setData] = useState([]);
     const [selectedRecepcionistas, setSelectedRecepcionistas] = useState([]);
@@ -77,17 +77,17 @@ const Estadisticas = () => {
     const handleSelectChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
         setSelectedRecepcionistas(selectedOptions);
-      
+    
         // Filter the data based on the selected receptionists
         const selectedData = data.filter(recepcionista => selectedOptions.includes(recepcionista.id.toString()));
         
         // Update the chart data with the selected data
         updateChartData(selectedData);
     };
-      
+    
     const updateChartData = (selectedData) => {
         const labels = ['Amabilidad', 'Eficiencia', 'Presentación', 'Conocimiento del Menú', 'Tiempo de Espera'];
-      
+    
         // Prepare datasets for each selected receptionist
         const datasets = selectedData.map(recepcionista => ({
             label: `${recepcionista.nombre || 'Sin nombre'}`,
@@ -102,7 +102,7 @@ const Estadisticas = () => {
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
         }));
-      
+    
         // Set the chart data
         setChartData({ labels, datasets });
     };
@@ -161,5 +161,5 @@ const Estadisticas = () => {
         </div>
     );
 };
-  
+
 export default Estadisticas;
