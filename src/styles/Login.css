@@ -1,5 +1,5 @@
 .login-form {
-  background: #223535;
+  background: inherit;
   display: flex;
   justify-content: center;
   flex-direction: column;

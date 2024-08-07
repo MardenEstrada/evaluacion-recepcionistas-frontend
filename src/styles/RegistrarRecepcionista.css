@@ -1,0 +1,91 @@
+.registrar-recepcionista {
+    background-color: inherit;
+    color: #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+}
+
+.error-message {
+    color: #d8ac4d;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background-color: transparent;
+    color: #ddd;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input.form-control:focus {
+    border-color: #ddd;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #797a2c;
+    color: #fff;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #d8ac4d;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Para Firefox */
+}

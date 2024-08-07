@@ -1,25 +1,33 @@
 import React from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import '../styles/Dashboard.css'; // Importa el archivo CSS aquí
+import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    navigate('/login');
+    localStorage.removeItem('token');
+    window.location.href = '/'; // Redirige al inicio de sesión o página principal
   };
 
   return (
     <div className="dashboard-container">
-      <div className="sidebar">
-        <Link to="/registrar-recepcionista" className="nav-link">Registrar Recepcionista</Link>
-        <Link to="/estadisticas" className="nav-link">Ver Estadísticas</Link>
-      </div>
-      <div className="content">
+      <aside className="sidebar">
+        <nav>
+          <ul>
+            <li>
+              <Link to="registrar-recepcionista" className="nav-link">Registrar Recepcionista</Link>
+            </li>
+            <li>
+              <Link to="estadisticas" className="nav-link">Ver Estadísticas</Link>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main className="main-content">
+        <h1>Sistema de evaluacion de Recepcionistas</h1>
         <Outlet />
-      </div>
-      <button onClick={handleLogout} className="btn-logout">Cerrar Sesión</button>
+      </main>
+      <footer className="footer">
+        <button onClick={handleLogout} className="btn-logout">Cerrar Sesión</button>
+      </footer>
     </div>
   );
 };

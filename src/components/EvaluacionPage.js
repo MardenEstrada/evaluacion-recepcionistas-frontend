@@ -14,6 +14,7 @@ function EvaluacionPage() {
   });
   const [recepcionistas, setRecepcionistas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,9 +53,10 @@ function EvaluacionPage() {
         conocimiento_menu: 5,
         tiempo_espera: 5
       });
+      setError('');
     } catch (error) {
       console.error('Error al registrar la evaluación', error.response ? error.response.data : error.message);
-      alert('Error al registrar la evaluación');
+      setError('Error al registrar la evaluación. Por favor, intenta nuevamente.');
     }
   };
 
@@ -62,46 +64,51 @@ function EvaluacionPage() {
 
   return (
     <div className="evaluacion-page">
-      <h1>Formulario de Evaluación</h1>
-      <button className="login-button" onClick={() => navigate('/login')}>Iniciar Sesión</button>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="recepcionista_id">Selecciona un Recepcionista:</label>
-          <select
-            id="recepcionista_id"
-            name="recepcionista_id"
-            value={evaluacion.recepcionista_id}
-            onChange={handleChange}
-          >
-            <option value="">Selecciona...</option>
-            {recepcionistas.map(recepcionista => (
-              <option key={recepcionista.id} value={recepcionista.id}>
-                {recepcionista.nombre} {recepcionista.apellido}
-              </option>
-            ))}
-          </select>
-        </div>
+      <header>
+        <h1>Formulario de Evaluación</h1>
+        <button className="login-button" onClick={() => navigate('/login')}>Iniciar Sesión</button>
+      </header>
+      <main>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="recepcionista_id">Selecciona un Recepcionista:</label>
+            <select
+              id="recepcionista_id"
+              name="recepcionista_id"
+              value={evaluacion.recepcionista_id}
+              onChange={handleChange}
+            >
+              <option value="">Selecciona...</option>
+              {recepcionistas.map(recepcionista => (
+                <option key={recepcionista.id} value={recepcionista.id}>
+                  {recepcionista.nombre} {recepcionista.apellido}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="evaluation-criteria">
-          <h3>Aspectos a Evaluar</h3>
-          {['amabilidad', 'eficiencia', 'presentacion', 'conocimiento_menu', 'tiempo_espera'].map((aspect, index) => (
-            <div className="range-group" key={index}>
-              <label htmlFor={aspect}>{aspect.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</label>
-              <input
-                type="range"
-                id={aspect}
-                name={aspect}
-                min="1"
-                max="10"
-                value={evaluacion[aspect]}
-                onChange={handleChange}
-              />
-              <span className="range-value">{evaluacion[aspect]}</span>
-            </div>
-          ))}
-        </div>
-        <button className="submit-button" type="submit">Enviar Evaluación</button>
-      </form>
+          <div className="evaluation-criteria">
+            <h3>Aspectos a Evaluar</h3>
+            {['amabilidad', 'eficiencia', 'presentacion', 'conocimiento_menu', 'tiempo_espera'].map((aspect, index) => (
+              <div className="range-group" key={index}>
+                <label htmlFor={aspect}>{aspect.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</label>
+                <input
+                  type="range"
+                  id={aspect}
+                  name={aspect}
+                  min="1"
+                  max="10"
+                  value={evaluacion[aspect]}
+                  onChange={handleChange}
+                />
+                <span className="range-value">{evaluacion[aspect]}</span>
+              </div>
+            ))}
+          </div>
+          {error && <div className={`error-message ${error ? 'show' : ''}`}>{error}</div>}
+          <button className="submit-button" type="submit">Enviar Evaluación</button>
+        </form>
+      </main>
     </div>
   );
 }

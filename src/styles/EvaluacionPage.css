@@ -1,16 +1,16 @@
-.evaluacion-page {
+.evaluacion-page{
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-.evaluacion-page h1 {
+.evaluacion-page h1{
   text-align: center;
-  color: #333;
+  color: #eee;
 }
 
-.login-button {
+.login-button{
   display: block;
   margin: 0 auto 20px auto;
   padding: 10px 20px;
@@ -21,33 +21,33 @@
   cursor: pointer;
 }
 
-.login-button:hover {
+.login-button:hover{
   background-color: #0056b3;
 }
 
-.form-group {
+.form-group{
   margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group label{
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.form-group select {
+.form-group select{
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.evaluation-criteria {
+.evaluation-criteria{
   margin-top: 20px;
 }
 
 
-.range-group {
+.range-group{
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -55,17 +55,17 @@
 
 
 
-.range-group label {
+.range-group label{
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.range-group input[type="range"] {
+.range-group input[type="range"]{
   width: 100%;
 }
 
-.range-group .range-value {
+.range-group .range-value{
   display: inline-block;
   width: 30px;
   text-align: center;
@@ -73,18 +73,13 @@
   margin-left: 10px;
 }
 
-.submit-button {
+.submit-button{
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #28a745;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.submit-button:hover {
-  background-color: #218838;
 }

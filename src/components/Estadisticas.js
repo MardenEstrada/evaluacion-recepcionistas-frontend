@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Radar } from 'react-chartjs-2';
 import api from '../api'; // Archivo que contiene la configuración de Axios
+import '../styles/Estadisticas.css'; // Importa el archivo CSS aquí
 
 // Registra los componentes necesarios en Chart.js
 ChartJS.register(
@@ -77,18 +78,15 @@ const Estadisticas = () => {
     const handleSelectChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
         setSelectedRecepcionistas(selectedOptions);
-    
-        // Filter the data based on the selected receptionists
+
         const selectedData = data.filter(recepcionista => selectedOptions.includes(recepcionista.id.toString()));
-        
-        // Update the chart data with the selected data
+
         updateChartData(selectedData);
     };
     
     const updateChartData = (selectedData) => {
         const labels = ['Amabilidad', 'Eficiencia', 'Presentación', 'Conocimiento del Menú', 'Tiempo de Espera'];
     
-        // Prepare datasets for each selected receptionist
         const datasets = selectedData.map(recepcionista => ({
             label: `${recepcionista.nombre || 'Sin nombre'}`,
             data: [
@@ -102,17 +100,16 @@ const Estadisticas = () => {
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
         }));
-    
-        // Set the chart data
+        
         setChartData({ labels, datasets });
     };
 
     return (
-        <div className="container" style={{ display: 'flex', height: '100vh', padding: '20px' }}>
-            <div className="chart-container" style={{ flex: '1', border: '1px solid #ddd', borderRadius: '8px', padding: '10px', position: 'relative' }}>
+        <div className="container">
+            <div className="chart-container">
                 <h2>Estadísticas de Evaluación</h2>
                 {chartData.datasets && chartData.datasets.length > 0 ? (
-                    <div style={{ position: 'relative', height: '100%' }}>
+                    <div className="radar-chart">
                         <Radar 
                             data={chartData} 
                             options={{
