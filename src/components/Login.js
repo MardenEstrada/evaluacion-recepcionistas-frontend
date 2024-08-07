@@ -15,7 +15,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8000/api/login', { email, password });
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard'); // Redirigir al dashboard después del login
+      navigate('/dashboard/estadisticas'); // Redirigir al dashboard después del login
     } catch (error) {
       console.error('Error al iniciar sesión', error);
       setError('Por favor, verifica tus credenciales e intenta nuevamente.'); // Establecer el mensaje de error

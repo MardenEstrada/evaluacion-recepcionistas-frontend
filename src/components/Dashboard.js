@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import './../styles/Dashboard.css';
 
 const Dashboard = () => {
   const handleLogout = () => {
@@ -22,7 +23,6 @@ const Dashboard = () => {
         </nav>
       </aside>
       <main className="main-content">
-        <h1>Sistema de evaluacion de Recepcionistas</h1>
         <Outlet />
       </main>
       <footer className="footer">

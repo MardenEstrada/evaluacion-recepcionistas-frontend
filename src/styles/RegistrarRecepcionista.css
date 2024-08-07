@@ -1,65 +1,36 @@
 .registrar-recepcionista {
-    background-color: inherit;
+    box-sizing: border-box;
+    max-width: 600px;
+    margin: 0 auto;
+    padding:  20px 10px;
+    font-family: Arial, sans-serif;
     color: #ddd;
-    padding: 20px;
     border-radius: 8px;
-    max-width: 500px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
-    max-width: 400px;
-    width: 100%;
+    box-shadow: 0 4px 15px rgba(187, 186, 186, 0.2);
 }
 
-header {
-    margin-bottom: 20px;
-}
-
-h2 {
+header h2 {
     text-align: center;
-    margin: 0;
-}
-
-.error-message {
     color: #d8ac4d;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-.error-message.show {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
-input.form-control {
+.form-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: transparent;
+    background: #3a3a3a;
     color: #ddd;
-    font-size: 1em;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-input.form-control:focus {
-    border-color: #ddd;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    outline: none;
 }
 
 .submit-button {
@@ -70,7 +41,6 @@ input.form-control:focus {
     background-color: #797a2c;
     color: #fff;
     font-size: 1em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -80,12 +50,19 @@ input.form-control:focus {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
+.error-message {
+    color: #d8ac4d;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+/* En caso el navegador sea Firefox*/
 input[type="number"] {
-  -moz-appearance: textfield; /* Para Firefox */
+    -moz-appearance: textfield; 
 }

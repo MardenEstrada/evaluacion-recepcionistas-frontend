@@ -87,22 +87,54 @@ const Estadisticas = () => {
     const updateChartData = (selectedData) => {
         const labels = ['Amabilidad', 'Eficiencia', 'Presentación', 'Conocimiento del Menú', 'Tiempo de Espera'];
     
-        const datasets = selectedData.map(recepcionista => ({
-            label: `${recepcionista.nombre || 'Sin nombre'}`,
-            data: [
-                recepcionista.amabilidad || 0,
-                recepcionista.eficiencia || 0,
-                recepcionista.presentacion || 0,
-                recepcionista.conocimiento_menu || 0,
-                recepcionista.tiempo_espera || 0,
-            ],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-        }));
-        
-        setChartData({ labels, datasets });
+        // Generar colores únicos para cada dataset
+        const generateRandomColor = () => {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+    
+        const datasets = selectedData.map(recepcionista => {
+            const totalEvaluaciones = recepcionista.count || 1; // Si no hay conteo, usamos 1 para evitar división por cero
+    
+            // Cálculo de promedios
+            const promedioAmabilidad = (recepcionista.amabilidad || 0) / totalEvaluaciones;
+            const promedioEficiencia = (recepcionista.eficiencia || 0) / totalEvaluaciones;
+            const promedioPresentacion = (recepcionista.presentacion || 0) / totalEvaluaciones;
+            const promedioConocimientoMenu = (recepcionista.conocimiento_menu || 0) / totalEvaluaciones;
+            const promedioTiempoEspera = (recepcionista.tiempo_espera || 0) / totalEvaluaciones;
+    
+            return {
+                label: `${recepcionista.nombre || 'Sin nombre'}`,
+                data: [
+                    promedioAmabilidad,
+                    promedioEficiencia,
+                    promedioPresentacion,
+                    promedioConocimientoMenu,
+                    promedioTiempoEspera,
+                ],
+                backgroundColor: generateRandomColor(), 
+                borderColor: generateRandomColor(),
+                borderWidth: 2,
+                hoverBackgroundColor: generateRandomColor(),
+                hoverBorderColor: generateRandomColor(),   
+                pointBackgroundColor: generateRandomColor(), 
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+            };
+        });
+    
+        setChartData({
+            labels,
+            datasets
+        });
     };
+    
+    
+    
 
     return (
         <div className="container">
@@ -111,49 +143,65 @@ const Estadisticas = () => {
                 {chartData.datasets && chartData.datasets.length > 0 ? (
                     <div className="radar-chart">
                         <Radar 
-                            data={chartData} 
-                            options={{
-                                maintainAspectRatio: false,
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                        position: 'left',
-                                        labels: {
-                                            padding: 20,
-                                            color: '#333',
-                                            font: {
-                                                size: 14
-                                            }
-                                        }
-                                    },
-                                    tooltip: {
-                                        callbacks: {
-                                            label: (context) => {
-                                                const label = context.dataset.label || '';
-                                                const value = context.raw || 0;
-                                                return `${label}: ${value}`;
-                                            }
-                                        }
-                                    }
-                                },
-                                scales: {
-                                    r: {
-                                        pointLabels: {
-                                            font: {
-                                                size: 14
-                                            }
-                                        },
-                                        ticks: {
-                                            display: true
-                                        }
-                                    }
-                                }
-                            }} 
-                        />
-                    </div>
-                ) : (
-                    <p>No hay datos disponibles para mostrar.</p>
-                )}
+    data={chartData} 
+    options={{
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'left',
+                labels: {
+                    color: '#ddd',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                borderColor: 'rgba(255, 255, 255, 0.2)',
+                borderWidth: 1,
+                callbacks: {
+                    label: (context) => {
+                        const label = context.dataset.label || '';
+                        const value = context.raw || 0;
+                        return `${label}: ${value}`;
+                    }
+                }
+            }
+        },
+        scales: {
+            r: {
+                angleLines: {
+                    display: true,
+                    color: '#ddd'
+                },
+                grid: {
+                    color: '#333'
+                },
+                pointLabels: {
+                    font: {
+                        size: 14,
+                        weight: 'bold',
+                        family: 'Segoe UI'
+                    },
+                    color: '#ddd'
+                },
+                ticks: {
+                    display: false
+                }
+            }
+        }
+    }} 
+/>
+
+        </div>
+            ) : (
+            <p>No hay datos disponibles para mostrar.</p>
+            )}
             </div>
         </div>
     );

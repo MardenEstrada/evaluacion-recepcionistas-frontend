@@ -31,10 +31,9 @@
   display: block;
   font-size: 0.9em;
   line-height: 2;
-
 }
 
-input[id=email]:invalid{
+input[id=email]:invalid {
   color: rgba(255, 255, 255, 0.349);
   border: 1px solid rgba(255, 0, 0, 0.486);
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.486);
@@ -42,7 +41,7 @@ input[id=email]:invalid{
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group input{
+.form-group input {
   width: 100%;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -56,20 +55,17 @@ input[id=email]:invalid{
 
 .form-group input:focus {
   border-color: #ddd;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  outline: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .submit-button {
   width: 100%;
   padding: 10px;
-  margin: 20px auto 10px auto;
   border: none;
   border-radius: 4px;
   background-color: #797a2c;
   color: #fff;
   font-size: 1em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -79,15 +75,8 @@ input[id=email]:invalid{
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-.error-message{
+.error-message {
   color: #d8ac4d;
   font-size: 0.9em;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-.error-message.show{
-  opacity: 1;
-  transform: translateY(0px);
+  margin-top: 10px;
 }
