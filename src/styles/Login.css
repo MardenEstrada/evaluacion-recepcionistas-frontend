@@ -1,30 +1,26 @@
-body {
-  background: #223535;
-  color: #ddd;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
 .login-form {
   background: #223535;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
   color: #ddd;
-  padding: 20px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 10px 20px;
   border-radius: 8px;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
-  max-width: 100%;
+  max-width: 400px;
   width: 100%;
 }
 
 .login-form h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: 300;
   font-size: 1.8em;
+  padding: 10px;
 }
 
 .form-group {
@@ -34,10 +30,19 @@ body {
 .form-group label {
   display: block;
   font-size: 0.9em;
-  margin-bottom: 5px;
+  line-height: 2;
+
 }
 
-.form-group input {
+input[id=email]:invalid{
+  color: rgba(255, 255, 255, 0.349);
+  border: 1px solid rgba(255, 0, 0, 0.486);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.486);
+  transform: scale(1.03);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input{
   width: 100%;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -58,7 +63,7 @@ body {
 .submit-button {
   width: 100%;
   padding: 10px;
-  margin-top: 20px;
+  margin: 20px auto 10px auto;
   border: none;
   border-radius: 4px;
   background-color: #797a2c;
@@ -72,4 +77,17 @@ body {
 .submit-button:hover {
   background-color: #d8ac4d;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.error-message{
+  color: #d8ac4d;
+  font-size: 0.9em;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.error-message.show{
+  opacity: 1;
+  transform: translateY(0px);
 }

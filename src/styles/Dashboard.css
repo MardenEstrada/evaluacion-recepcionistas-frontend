@@ -2,14 +2,14 @@ body {
   background: #223535;
   color: #ddd;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
 }
   .dashboard-container {
     display: flex;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
   }
   
   .sidebar {

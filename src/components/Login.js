@@ -6,17 +6,19 @@ import '../styles/Login.css'; // Importa el archivo CSS aquí
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
       const response = await axios.post('http://localhost:8000/api/login', { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/dashboard'); // Redirigir al dashboard después del login
     } catch (error) {
       console.error('Error al iniciar sesión', error);
-      alert('Error al iniciar sesión');
+      setError('Por favor, verifica tus credenciales e intenta nuevamente.'); // Establecer el mensaje de error
     }
   };
 
@@ -48,11 +50,17 @@ const Login = () => {
           required
         />
       </div>
+      {error && (
+        <div className={`error-message ${error ? 'show' : ''}`}>
+          {error}
+        </div>
+      )}
       <button className="submit-button" type="submit" name="submit">Iniciar Sesión</button>
     </form>
   </main>
   
-  );
+  );  
+  
 };
 
 export default Login;
