@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './../styles/RegistrarRecepcionista.css'
+import './../styles/RegistrarRecepcionista.css';
 
-const RegistrarRecepcionista = () => {
+const Formulario = () => {
   const [nombre, setNombre] = useState('');
   const [dni, setDni] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+
+  const handleDniChange = (e) => {
+      const value = e.target.value;
+      if (/^\d{0,8}$/.test(value)) {
+          setDni(value);
+      }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:8000/api/v1/recepcionistas', { nombre, dni });
-      navigate('/');  // Redirigir al dashboard después de agregar
+      setSuccess('Recepcionista registrado con éxito.');
       setError('');
+      setNombre('');
+      setDni('');
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error('Error al registrar el recepcionista', error);
-      setError('Error al registrar el recepcionista. Por favor, intenta nuevamente.');
+      if (error.response) {
+        setError(`Error al registrar el recepcionista: ${error.response.data.message || 'Por favor, intenta nuevamente.'}`);
+      } else {
+        setError('Error al registrar el recepcionista. Por favor, intenta nuevamente.');
+      }
+      setSuccess('');
     }
   };
+  
 
   return (
     <div className="registrar-recepcionista">
@@ -42,14 +61,17 @@ const RegistrarRecepcionista = () => {
           <div className="form-group">
             <label htmlFor="dni">DNI:</label>
             <input
-              type="number"
-              id="dni"
-              value={dni}
-              onChange={(e) => setDni(e.target.value)}
-              className="form-control"
-              required
+                type="text"
+                id="dni"
+                value={dni}
+                onChange={handleDniChange}
+                className="form-control"
+                required
+                maxLength={8}
+                inputMode="numeric"
             />
           </div>
+          {success && <div className="success-message">{success}</div>}
           {error && <div className={`error-message ${error ? 'show' : ''}`}>{error}</div>}
           <button type="submit" className="submit-button">Registrar</button>
         </form>
@@ -58,4 +80,4 @@ const RegistrarRecepcionista = () => {
   );
 };
 
-export default RegistrarRecepcionista;
+export default Formulario;

@@ -36,7 +36,7 @@
 }
 
 .sidebar nav ul li .nav-link:hover {
-  color: #d8ac4d;
+  color: #d8904d;
 }
 
 .main-content {
@@ -61,7 +61,7 @@
 }
 
 .btn-logout {
-  background-color: #797a2c;
+  background-color: #b4893a;
   color: #fff;
   border: none;
   padding: 10px 20px;

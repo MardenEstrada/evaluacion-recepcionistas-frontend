@@ -74,9 +74,17 @@ input[id=email]:invalid {
   background-color: #d8ac4d;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
-
 .error-message {
+  margin:5px 0;
+  padding-bottom: 10px;
   color: #d8ac4d;
   font-size: 0.9em;
-  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.error-message.show {
+  opacity: 1;
+  transform: translateY(0); 
 }

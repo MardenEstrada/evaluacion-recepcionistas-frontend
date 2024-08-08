@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/EvaluacionPage.css'; // Importa el archivo CSS aquí
+import '../styles/EvaluacionPage.css'
 
 function EvaluacionPage() {
   const [evaluacion, setEvaluacion] = useState({
@@ -15,6 +15,7 @@ function EvaluacionPage() {
   const [recepcionistas, setRecepcionistas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function EvaluacionPage() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/api/v1/evaluaciones', evaluacion);
-      alert('Evaluación registrada con éxito');
+      setSuccessMessage('¡Evaluación registrada con éxito!');
       setEvaluacion({
         recepcionista_id: '',
         amabilidad: 5,
@@ -54,9 +55,11 @@ function EvaluacionPage() {
         tiempo_espera: 5
       });
       setError('');
+      setTimeout(() => setSuccessMessage(''), 5000);
     } catch (error) {
       console.error('Error al registrar la evaluación', error.response ? error.response.data : error.message);
       setError('Error al registrar la evaluación. Por favor, intenta nuevamente.');
+      setSuccessMessage('');
     }
   };
 
@@ -69,6 +72,7 @@ function EvaluacionPage() {
         <button className="login-button" onClick={() => navigate('/login')}>Iniciar Sesión</button>
       </header>
       <main>
+        {successMessage && <div className="success-message">{successMessage}</div>} {/* Mensaje de éxito */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="recepcionista_id">Selecciona un Recepcionista:</label>
@@ -89,19 +93,27 @@ function EvaluacionPage() {
 
           <div className="evaluation-criteria">
             <h3>Aspectos a Evaluar</h3>
-            {['amabilidad', 'eficiencia', 'presentacion', 'conocimiento_menu', 'tiempo_espera'].map((aspect, index) => (
+            {[
+              { id: 'amabilidad', label: 'Amabilidad', description: 'Califica la cordialidad y atención del recepcionista.' },
+              { id: 'eficiencia', label: 'Eficiencia', description: 'Evalúa la rapidez y eficacia en el servicio.' },
+              { id: 'presentacion', label: 'Presentación', description: 'Observa la apariencia y vestimenta del recepcionista.' },
+              { id: 'conocimiento_menu', label: 'Conocimiento del Menú', description: 'Considera el conocimiento del menú por parte del recepcionista.' },
+              { id: 'tiempo_espera', label: 'Tiempo de Espera', description: 'Evalúa el tiempo que tardaste en ser atendido.' }
+            ].map((aspect, index) => (
               <div className="range-group" key={index}>
-                <label htmlFor={aspect}>{aspect.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</label>
+                <label htmlFor={aspect.id} title={aspect.description}>
+                  {aspect.label}:
+                </label>
                 <input
                   type="range"
-                  id={aspect}
-                  name={aspect}
+                  id={aspect.id}
+                  name={aspect.id}
                   min="1"
                   max="10"
-                  value={evaluacion[aspect]}
+                  value={evaluacion[aspect.id]}
                   onChange={handleChange}
                 />
-                <span className="range-value">{evaluacion[aspect]}</span>
+                <span className="range-value">{evaluacion[aspect.id]}</span>
               </div>
             ))}
           </div>

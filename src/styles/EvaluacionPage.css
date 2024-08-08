@@ -1,11 +1,16 @@
 .evaluacion-page {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 100%;
+  width: 100vh;
+  margin: 50px auto;
+  padding: 20px 50px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #1e1e1e;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: center;
 }
 
 .evaluacion-page h1 {
@@ -14,6 +19,24 @@
   margin-bottom: 20px;
 }
 
+.success-message {
+  background-color: #4cdd42c7;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeOut 0.5s ease-in-out forwards;
+  animation-delay: 4.5s;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
 .login-button {
   display: block;
   margin: 0 auto 20px auto;
@@ -39,7 +62,7 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-size: 1.1em !important;
   color: #ddd;
 }
 
@@ -50,12 +73,28 @@
   border-radius: 5px;
   background-color: #333;
   color: #ddd;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  font-weight: 100;
+  font-size: 16px;
 }
 
 .form-group select:focus {
   border-color: #ff9900;
+  background-color: #444;
+  color: #fff;
   outline: none;
+}
+
+.form-group select option {
+  background-color: #333;
+  color: #ddd;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.form-group select option:hover {
+  background-color: #ff9900;
+  color: #000;
 }
 
 .evaluation-criteria {
@@ -66,18 +105,92 @@
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .range-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: 600;
-  color: #ddd; 
+  color: #ddd;
+  position: relative; 
 }
 
+.range-group label[title] {
+  position: relative;
+  cursor: pointer;
+}
+
+.range-group label[title]::after {
+  content: attr(title);
+  font-size: 0.8em;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 125%;
+  background-color: #4b48489d;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.range-group label[title]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
 .range-group input[type="range"] {
+  -webkit-appearance: none;
   width: 100%;
-  background-color: #444;
+  height: 7px;
+  margin: 0 15px;
+  background: linear-gradient(to right, #ff9900c4, #ff6600c4);
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.range-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ff9900;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.range-group input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff9900;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.range-group input[type="range"]::-webkit-slider-thumb:hover,
+.range-group input[type="range"]::-moz-range-thumb:hover {
+  background: #ff6600;
+  transform: scale(5);
+}
+
+.range-group input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: -10px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.range-group input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: transparent;
   border-radius: 5px;
 }
 
@@ -87,5 +200,5 @@
   text-align: center;
   font-weight: 600;
   margin-left: 10px;
-  color: #ddd;
+  color: #ff9900;
 }
