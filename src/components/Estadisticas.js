@@ -88,7 +88,7 @@ const Estadisticas = () => {
     const handleDivClick = (id) => {
         const checkbox = document.getElementById(`checkbox-${id}`);
         if (checkbox) {
-            checkbox.click(); // Simula un clic en el checkbox
+            checkbox.click();
         }
     };
 

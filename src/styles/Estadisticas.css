@@ -8,11 +8,12 @@
 
 h2{
     display: flex;
-    justify-content: center;
+    justify-content: center ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 25px;
+    text-wrap: nowrap;
 }
 
 .recepcionistas-list {
@@ -74,12 +75,15 @@ h2{
 
 
 .legend-container {
-    max-width: 284px;
+    max-width: 300px;
     width: 55%;
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: auto;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     margin: auto;
+    padding: 10px;
     border-radius: 5px;
     border-left: 0.5px ;
     box-shadow: 0 0 7px#eeeeee71 ;
@@ -90,6 +94,9 @@ h2{
     align-items: center;
     margin: auto;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.3em;
 }
 
 .legend-container .legend-color-box {
